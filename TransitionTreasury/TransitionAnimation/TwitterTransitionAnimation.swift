@@ -36,42 +36,60 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         
         let containView = transitionContext.containerView()
         let screenBounds = UIScreen.mainScreen().bounds
-        var angle = M_PI/48
+        let angle = M_PI/48
         var transform = CATransform3DIdentity
         transform.m34 = -1.0/500.0
-        
+
+        var fromView = fromVC?.view.snapshotViewAfterScreenUpdates(true)
+        var toView = toVC?.view.snapshotViewAfterScreenUpdates(true)
+
         transformBackup = fromVC?.view.layer.transform
-        
+
         var startFrame = CGRectOffset(screenBounds, 0, screenBounds.size.height)
         var finalFrame = screenBounds
-        
+
         if transitionStatus == .Dismiss {
+            swap(&fromView, &toView)
             swap(&fromVC, &toVC)
             swap(&startFrame, &finalFrame)
-            angle = -angle
-        } else if transitionStatus == .Present {
+
+            let t = CATransform3DRotate(transform, CGFloat(angle), 1, 0, 0)
+            fromView?.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            fromView?.layer.position = CGPoint(x: fromView!.layer.position.x, y: fromView!.layer.position.y + fromView!.layer.bounds.height / 2)
+            fromView?.layer.transform = t
+		} else if transitionStatus == .Present {
             transform = CATransform3DRotate(transform, CGFloat(angle), 1, 0, 0)
             anchorPointBackup = fromVC?.view.layer.anchorPoint
             positionBackup = fromVC?.view.layer.position
-            fromVC?.view.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-            fromVC?.view.layer.position = CGPoint(x: fromVC!.view.layer.position.x, y: fromVC!.view.layer.position.y + fromVC!.view.layer.bounds.height / 2)
+            fromView?.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            fromView?.layer.position = CGPoint(x: fromView!.layer.position.x, y: fromView!.layer.position.y + fromView!.layer.bounds.height / 2)
         }
-        
-        toVC?.view.layer.frame = startFrame
-        
+
+        toView?.layer.frame = startFrame
+
         containView?.addSubview(fromVC!.view)
         containView?.addSubview(toVC!.view)
-        
+        toVC?.view.hidden = true
+        fromVC?.view.hidden = true
+
+        containView?.addSubview(fromView!)
+        containView?.addSubview(toView!)
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: .CurveEaseInOut, animations: {
-            fromVC?.view.layer.transform = transform
-            toVC?.view.layer.frame = finalFrame
-            }) { (finished) -> Void in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-                if self.transitionStatus == .Dismiss && finished {
-                    fromVC?.view.layer.anchorPoint = self.anchorPointBackup ?? CGPoint(x: 0.5, y: 0.5)
-                    fromVC?.view.layer.position = self.positionBackup ?? CGPoint(x: fromVC!.view.layer.position.x, y: fromVC!.view.layer.position.y - fromVC!.view.layer.bounds.height / 2)
-                    fromVC?.view.layer.transform = self.transformBackup ?? CATransform3DIdentity
-                }
+            fromView?.layer.transform = transform
+            toView?.layer.frame = finalFrame
+			}) { (finished) -> Void in
+				transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+				if self.transitionStatus == .Dismiss && finished {
+					fromView?.layer.anchorPoint = self.anchorPointBackup ?? CGPoint(x: 0.5, y: 0.5)
+					fromView?.layer.position = self.positionBackup ?? CGPoint(x: fromView!.layer.position.x, y: fromView!.layer.position.y - fromView!.layer.bounds.height / 2)
+					fromView?.layer.transform = self.transformBackup ?? CATransform3DIdentity
+				}
+
+				toView?.removeFromSuperview()
+				fromView?.removeFromSuperview()
+				toVC?.view.hidden = false
+				fromVC?.view.hidden = false
+
         }
     }
 }
