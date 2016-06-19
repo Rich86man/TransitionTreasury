@@ -67,13 +67,13 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
 
         toView?.layer.frame = startFrame
 
-        containView?.addSubview(fromVC!.view)
-        containView?.addSubview(toVC!.view)
+        containView.addSubview(fromVC!.view)
+        containView.addSubview(toVC!.view)
         toVC?.view.hidden = true
         fromVC?.view.hidden = true
 
-        containView?.addSubview(fromView!)
-        containView?.addSubview(toView!)
+        containView.addSubview(fromView!)
+        containView.addSubview(toView!)
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: .CurveEaseInOut, animations: {
             fromView?.layer.transform = transform
             toView?.layer.frame = finalFrame

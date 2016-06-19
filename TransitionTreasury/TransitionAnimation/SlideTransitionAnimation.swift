@@ -61,8 +61,8 @@ public class SlideTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
             swap(&fromVCEndPositionX, &toVCStartPositionX)
         }
         
-        containView?.addSubview(fromVC!.view)
-        containView?.addSubview(toVC!.view)
+        containView.addSubview(fromVC!.view)
+        containView.addSubview(toVC!.view)
         
         fromVC?.view.layer.position.x = fromVCStartPositionX + toVC!.view.layer.bounds.width / 2
         toVC?.view.layer.position.x = toVCStartPositionX + toVC!.view.layer.bounds.width / 2

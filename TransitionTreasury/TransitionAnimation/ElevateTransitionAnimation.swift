@@ -74,8 +74,8 @@ public class ElevateTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         maskViewCopy.layer.position = endPosition
         
         
-        containView?.addSubview(fromVC!.view)
-        containView?.addSubview(toVC!.view)
+        containView.addSubview(fromVC!.view)
+        containView.addSubview(toVC!.view)
         toVC?.view.addSubview(maskViewCopy)
         toVC?.view.layer.mask = maskLayer
 
