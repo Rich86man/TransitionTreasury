@@ -47,7 +47,7 @@ public class PageTransitionAnimation: NSObject, TRViewControllerAnimatedTransiti
         self.transitionContext = transitionContext
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()
+        let containView = transitionContext.containerView()!
         
         var startPositionX: CGFloat = UIScreen.mainScreen().bounds.width
         var endPositionX: CGFloat = 0

@@ -40,7 +40,7 @@ public class IBanTangTransitionAnimation: NSObject, TRViewControllerAnimatedTran
         self.transitionContext = transitionContext
         let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()
+        let containView = transitionContext.containerView()!
         
         let lightMaskLayer: CALayer = {
             let layer =  CALayer()

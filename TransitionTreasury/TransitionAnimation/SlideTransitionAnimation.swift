@@ -18,7 +18,7 @@ public class SlideTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
     
     public var gestureRecognizer: UIGestureRecognizer? {
         didSet {
-            gestureRecognizer?.addTarget(self, action: Selector("interactiveTransition:"))
+            gestureRecognizer?.addTarget(self, action: #selector(SlideTransitionAnimation.interactiveTransition(_:)))
         }
     }
     
@@ -43,7 +43,7 @@ public class SlideTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
         self.transitionContext = transitionContext
         let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()
+        let containView = transitionContext.containerView()!
         guard let tabBarController = fromVC?.tabBarController else { fatalError("No TabBarController.") }
         guard let fromVCIndex = tabBarController.viewControllers?.indexOf(fromVC!), toVCIndex = tabBarController.viewControllers?.indexOf(toVC!) else {
             fatalError("VC not in TabBarController.")
@@ -102,7 +102,7 @@ public class SlideTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
             if percent > interactivePrecent {
                 percentTransition.completionSpeed = 1.0 - percentTransition.percentComplete
                 percentTransition.finishInteractiveTransition()
-                gestureRecognizer?.removeTarget(self, action: Selector("interactiveTransition:"))
+                gestureRecognizer?.removeTarget(self, action: #selector(SlideTransitionAnimation.interactiveTransition(_:)))
             } else {
                 percentTransition.cancelInteractiveTransition()
             }

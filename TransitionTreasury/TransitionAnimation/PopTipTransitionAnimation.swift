@@ -21,7 +21,7 @@ public class PopTipTransitionAnimation: NSObject, TRViewControllerAnimatedTransi
     private var mainVC: UIViewController?
     
     lazy private var tapGestureRecognizer: UITapGestureRecognizer = {
-        let tap = UITapGestureRecognizer(target: self, action: Selector("tapDismiss:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PopTipTransitionAnimation.tapDismiss(_:)))
         return tap
     }()
     
@@ -51,7 +51,7 @@ public class PopTipTransitionAnimation: NSObject, TRViewControllerAnimatedTransi
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
         
-        let containView = transitionContext.containerView()
+        let containView = transitionContext.containerView()!
         let screenBounds = UIScreen.mainScreen().bounds
         
         var startFrame = CGRectOffset(screenBounds, 0, screenBounds.size.height)
