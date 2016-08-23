@@ -8,23 +8,23 @@
 
 import TransitionTreasury
 /// OmniFocus app push transition implement.
-public class OMNITransitionAnimation: NSObject, TRViewControllerAnimatedTransitioning, TransitionInteractiveable {
+open class OMNITransitionAnimation: NSObject, TRViewControllerAnimatedTransitioning, TransitionInteractiveable {
 
-    public var transitionStatus: TransitionStatus
+    open var transitionStatus: TransitionStatus
     
-    public var transitionContext: UIViewControllerContextTransitioning?
+    open var transitionContext: UIViewControllerContextTransitioning?
     
-    public var percentTransition: UIPercentDrivenInteractiveTransition?
+    open var percentTransition: UIPercentDrivenInteractiveTransition?
 
-    public var completion: (() -> Void)?
+    open var completion: (() -> Void)?
 
-    public var bottomView: UIView = UIView()
+    open var bottomView: UIView = UIView()
 
-    public var cancelPop: Bool = false
+    open var cancelPop: Bool = false
 
-    public var interacting: Bool = false
+    open var interacting: Bool = false
     
-    public private(set) var keyView: UIView
+    open fileprivate(set) var keyView: UIView
     
     public init(key: UIView, status: TransitionStatus = .push) {
         keyView = key
@@ -32,14 +32,14 @@ public class OMNITransitionAnimation: NSObject, TRViewControllerAnimatedTransiti
         super.init()
     }
     
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
     
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
-        var fromVC = transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey)
-        var toVC = transitionContext.viewController(forKey: UITransitionContextToViewControllerKey)
+        var fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+        var toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
         let containView = transitionContext.containerView
         
         var topHeight: CGFloat = 0
@@ -87,8 +87,8 @@ public class OMNITransitionAnimation: NSObject, TRViewControllerAnimatedTransiti
                 self.bottomView.removeFromSuperview()
                 if !self.cancelPop {
                     if self.transitionStatus == .pop {
-                        transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey)?.view.layer.mask = nil
-                        transitionContext.viewController(forKey: UITransitionContextToViewControllerKey)?.view.layer.mask = nil
+                        transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)?.view.layer.mask = nil
+                        transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)?.view.layer.mask = nil
                     }
                     if finished {
                         self.completion?()

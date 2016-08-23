@@ -9,31 +9,31 @@
 import TransitionTreasury
 
 /// Like Twitter Present.
-public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTransitioning {
+open class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTransitioning {
 
-    public var transitionStatus: TransitionStatus
+    open var transitionStatus: TransitionStatus
 
-    public var transitionContext: UIViewControllerContextTransitioning?
+    open var transitionContext: UIViewControllerContextTransitioning?
 
-    private var anchorPointBackup: CGPoint?
+    fileprivate var anchorPointBackup: CGPoint?
 
-    private var positionBackup: CGPoint?
+    fileprivate var positionBackup: CGPoint?
 
-    private var transformBackup: CATransform3D?
+    fileprivate var transformBackup: CATransform3D?
 
     public init(status: TransitionStatus = .present) {
         transitionStatus = status
         super.init()
     }
 
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
 
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
-        var fromVC = transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey)
-        var toVC = transitionContext.viewController(forKey: UITransitionContextToViewControllerKey)
+        var fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+        var toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
 
         let containView = transitionContext.containerView
         let screenBounds = UIScreen.main.bounds
@@ -41,8 +41,8 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         var transform = CATransform3DIdentity
         transform.m34 = -1.0/500.0
 
-        var fromView = fromVC?.view.snapshotViewAfterScreenUpdates(true)
-        var toView = toVC?.view.snapshotViewAfterScreenUpdates(true)
+        var fromView = fromVC?.view.snapshotView(afterScreenUpdates: true)
+        var toView = toVC?.view.snapshotView(afterScreenUpdates: true)
 
         transformBackup = fromVC?.view.layer.transform
 
@@ -70,8 +70,8 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
 
         containView.addSubview(fromVC!.view)
         containView.addSubview(toVC!.view)
-        toVC?.view.hidden = true
-        fromVC?.view.hidden = true
+        toVC?.view.isHidden = true
+        fromVC?.view.isHidden = true
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .curveEaseInOut, animations: {
           fromView?.layer.transform = transform
@@ -85,8 +85,8 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
                 }
                 toView?.removeFromSuperview()
                 fromView?.removeFromSuperview()
-                toVC?.view.hidden = false
-                fromVC?.view.hidden = false
+                toVC?.view.isHidden = false
+                fromVC?.view.isHidden = false
         }
     }
 }

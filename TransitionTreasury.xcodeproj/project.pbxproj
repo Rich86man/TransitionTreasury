@@ -338,6 +338,7 @@
 					26FDFF131C33C4A600CB3995 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = HY634B3FW2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -565,6 +566,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.transitiontreasury.TransitionTreasuryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -577,6 +579,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.transitiontreasury.TransitionTreasuryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
