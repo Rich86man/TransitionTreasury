@@ -49,7 +49,7 @@ open class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
         var startFrame = screenBounds.offsetBy(dx: 0, dy: screenBounds.size.height)
         var finalFrame = screenBounds
 
-        if transitionStatus == .Dismiss {
+        if transitionStatus == .dismiss {
             swap(&fromView, &toView)
             swap(&fromVC, &toVC)
             swap(&startFrame, &finalFrame)
@@ -58,7 +58,7 @@ open class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
             fromView?.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
             fromView?.layer.position = CGPoint(x: fromView!.layer.position.x, y: fromView!.layer.position.y + fromView!.layer.bounds.height / 2)
             fromView?.layer.transform = t
-		} else if transitionStatus == .Present {
+		} else if transitionStatus == .present {
             transform = CATransform3DRotate(transform, CGFloat(angle), 1, 0, 0)
             anchorPointBackup = fromVC?.view.layer.anchorPoint
             positionBackup = fromVC?.view.layer.position
