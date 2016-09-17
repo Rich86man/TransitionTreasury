@@ -40,7 +40,7 @@ public class DefaultPushTransitionAnimation: NSObject, TRViewControllerAnimatedT
         self.transitionContext = transitionContext
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         var fromVCStartX: CGFloat = 0
         var fromVCEndX = -UIScreen.mainScreen().bounds.width/3

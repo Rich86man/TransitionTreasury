@@ -37,7 +37,7 @@ public class ElevateTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         self.transitionContext = transitionContext
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         var startPosition = toVC!.view.convertPoint(maskView.layer.position, fromView: maskView.superview)
         var endPosition = toPosition

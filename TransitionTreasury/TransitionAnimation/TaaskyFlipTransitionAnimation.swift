@@ -35,7 +35,7 @@ public class TaaskyFlipTransitionAnimation: NSObject, TRViewControllerAnimatedTr
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
         
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         let angle = M_PI/2
         var startTransform = CATransform3DIdentity

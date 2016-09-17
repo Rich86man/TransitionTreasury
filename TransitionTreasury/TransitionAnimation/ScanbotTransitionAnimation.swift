@@ -52,7 +52,7 @@ public class ScanbotTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         self.transitionContext = transitionContext
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         var fromVCStartY: CGFloat = 0
         var fromVCEndY = UIScreen.mainScreen().bounds.height

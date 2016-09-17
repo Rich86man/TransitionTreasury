@@ -51,7 +51,7 @@ public class PopTipTransitionAnimation: NSObject, TRViewControllerAnimatedTransi
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
         
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         let screenBounds = UIScreen.mainScreen().bounds
         
         var startFrame = CGRectOffset(screenBounds, 0, screenBounds.size.height)

@@ -34,7 +34,7 @@ public class TwitterTransitionAnimation: NSObject, TRViewControllerAnimatedTrans
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
         
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         let screenBounds = UIScreen.mainScreen().bounds
         let angle = M_PI/48
         var transform = CATransform3DIdentity

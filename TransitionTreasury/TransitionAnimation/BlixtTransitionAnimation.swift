@@ -43,7 +43,7 @@ public class BlixtTransitionAnimation: NSObject, TRViewControllerAnimatedTransit
         self.transitionContext = transitionContext
         let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         let leftX: CGFloat = 0
         let rightX = UIScreen.mainScreen().bounds.width

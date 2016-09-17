@@ -40,7 +40,7 @@ public class OMINTransitionAnimation: NSObject, TRViewControllerAnimatedTransiti
         self.transitionContext = transitionContext
         var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containView = transitionContext.containerView()!
+        let containView = transitionContext.containerView()
         
         var topHeight: CGFloat = 0
         var bottomHeight = fromVC!.view.layer.bounds.size.height - topHeight
